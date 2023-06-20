@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <string.h>
 
 #include "errors.h"
 /*
@@ -12,6 +13,7 @@
 */
 #define SUCCESS 0
 #define FAILURE -1
+#define TOKEN_SIZE 32
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -64,5 +66,11 @@ int pop_stack_s(monty_info_t *info);
 int print_stack_s(stack_t *head);
 int top_stack_s(stack_t *head);
 int pop_all_stack_s(monty_info_t *info);
+
+/* parser.c */
+char *sReadFile(char *filename);
+void print_tokens(char **tokens);
+void free_tokens(char **tokens);
+char **parse(char *str);
 
 #endif /* MONTY_H */

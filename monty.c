@@ -11,7 +11,8 @@ int main(void)
 	info.line = 1;
 
 	char *fileS = sReadFile("bytecodes/00.m");
-	printf("%s", fileS);
+	char **tokens = parse(fileS);
+	print_tokens(tokens);
 
 	return (0);
 }
