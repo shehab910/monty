@@ -32,6 +32,29 @@ typedef struct stack_s
 } stack_t;
 
 /**
+ * struct monty_info_s - monty global information/variables
+ * @file: file pointer to the monty file
+ * @line: line number of the monty file
+ * @stack: pointer to the stack
+ * @stack_size: size of the stack
+ * @tokens: array of tokens
+ * @tokens_len: length of the tokens array
+ * @token_index: index of the current token
+ * Description: monty global information/variables
+ */
+typedef struct monty_info_s
+{
+	FILE *file;
+	unsigned int line;
+	stack_t *stack_head;
+	size_t stack_size;
+	char **tokens;
+	size_t tokens_len;
+	unsigned int token_index;
+
+} monty_info_t;
+
+/**
  * struct instruction_s - opcode and its function
  * @opcode: the opcode
  * @f: function to handle the opcode
@@ -42,23 +65,8 @@ typedef struct stack_s
 typedef struct instruction_s
 {
 	char *opcode;
-	void (*f)(stack_t **stack, unsigned int line_number);
+	void (*f)(monty_info_t *info);
 } instruction_t;
-
-/**
- * struct monty_info_s - monty global information/variables
- * @file: file pointer to the monty file
- * @line: line number of the monty file
- * @stack: pointer to the stack
- * @stack_size: size of the stack
- */
-typedef struct monty_info_s
-{
-	FILE *file;
-	unsigned int line;
-	stack_t *stack_head;
-	size_t stack_size;
-} monty_info_t;
 
 /* stack.c */
 int push_stack_s(monty_info_t *info, int new_num);
@@ -72,5 +80,11 @@ char *sReadFile(char *filename);
 void print_tokens(char **tokens);
 void free_tokens(char **tokens);
 char **parse(char *str);
+
+/* operations.c */
+void (*get_op_func(char *s))(monty_info_t *info);
+int op_handler(monty_info_t *info);
+void push_op(monty_info_t *info);
+void pall_op(monty_info_t *info);
 
 #endif /* MONTY_H */
