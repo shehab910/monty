@@ -1,20 +1,28 @@
 #include "monty.h"
 
-int main(void)
+int main(int argc, char **argv)
 {
 	monty_info_t info;
 	stack_t *head = NULL;
+	char *fileS;
+	char **tokens;
+	int i;
 
+	if (argc != 2)
+	{
+		printf("USAGE: monty file\n");
+		exit(EXIT_FAILURE);
+	}
 	info.stack_head = head;
 	info.stack_size = 0;
 	info.line = 1;
 
-	char *fileS = sReadFile("bytecodes/custom_1.m");
-	char **tokens = parse(fileS);
+	fileS = sReadFile(argv[1]);
+	tokens = parse(fileS);
 
 	info.tokens = tokens;
 
-	int i = 0;
+	i = 0;
 	while (tokens[i] != NULL)
 		i++;
 	info.tokens_len = i;

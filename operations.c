@@ -72,8 +72,10 @@ void (*get_op_func(char *s))(monty_info_t *info)
  */
 int op_handler(monty_info_t *info)
 {
+	/*
 	print_tokens(info->tokens);
 	printf("-------------------------------------------------\n");
+	*/
 	void (*op_func)(monty_info_t *info);
 
 	info->token_index = 0;
