@@ -8,7 +8,6 @@ const instruction_t opcodes[] = {
 /**
  * push_op - push a new node to the stack
  * @info: pointer to the monty info struct
- * @arg: argument to be pushed
  */
 void push_op(monty_info_t *info)
 {
@@ -39,7 +38,6 @@ void push_op(monty_info_t *info)
 /**
  * pall_op - print the stack
  * @info: pointer to the monty info struct
- * @arg: argument to be pushed
  */
 void pall_op(monty_info_t *info)
 {
@@ -67,15 +65,14 @@ void (*get_op_func(char *s))(monty_info_t *info)
 /**
  * op_handler - handles the operations
  * @info: pointer to the monty info struct
- * @tokens: array of tokens
  * Return: 0 on success, 1 on failure
  */
 int op_handler(monty_info_t *info)
 {
 	/*
-	print_tokens(info->tokens);
-	printf("-------------------------------------------------\n");
-	*/
+	 * print_tokens(info->tokens);
+	 * printf("-------------------------------------------------\n");
+	 */
 	void (*op_func)(monty_info_t *info);
 
 	info->token_index = 0;
@@ -85,7 +82,11 @@ int op_handler(monty_info_t *info)
 		op_func = get_op_func(info->tokens[info->token_index]);
 		if (op_func == NULL)
 		{
-			fprintf(stderr, "L%d: unknown instruction %s\n", info->line, info->tokens[info->token_index]);
+			fprintf(
+				stderr,
+				"L%d: unknown instruction %s\n",
+				info->line,
+				info->tokens[info->token_index]);
 			return (1);
 		}
 		op_func(info);

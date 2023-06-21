@@ -8,9 +8,9 @@
 
 #include "errors.h"
 /*
-#define SAFE_PRINT(c) (write(STDOUT_FILENO, c, _strlen(c)))
-#define SAFE_PRINT_ERR(c) (write(STDERR_FILENO, c, _strlen(c)))
-*/
+ * #define SAFE_PRINT(c) (write(STDOUT_FILENO, c, _strlen(c)))
+ * #define SAFE_PRINT_ERR(c) (write(STDERR_FILENO, c, _strlen(c)))
+ */
 #define SUCCESS 0
 #define FAILURE -1
 #define TOKEN_SIZE 32
@@ -35,7 +35,7 @@ typedef struct stack_s
  * struct monty_info_s - monty global information/variables
  * @file: file pointer to the monty file
  * @line: line number of the monty file
- * @stack: pointer to the stack
+ * @stack_head: pointer to the stack
  * @stack_size: size of the stack
  * @tokens: array of tokens
  * @tokens_len: length of the tokens array

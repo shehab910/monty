@@ -2,7 +2,7 @@
 
 /**
  * push_stack_s - push a new node to the stack
- * @head: pointer to the head of the stack
+ * @info: pointer to the monty info struct
  * @new_num: new number to be pushed
  * Return: 0 on success, 1 on failure
  */
@@ -75,7 +75,7 @@ int top_stack_s(stack_t *head)
 
 /**
  * pop_all_stack_s - pop all nodes of the stack
- * @head: pointer to the head of the stack
+ * @info: pointer to the monty info struct
  * Return: 0 on success, 1 on failure
  */
 int pop_all_stack_s(monty_info_t *info)
