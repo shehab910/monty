@@ -6,6 +6,7 @@ const instruction_t opcodes[] = {
 	{"pint", pint_op},
 	{"pop", pop_op},
 	{"swap", swap_op},
+	{"add", add_op},
 	{NULL, NULL}};
 
 /**
@@ -94,6 +95,24 @@ void swap_op(monty_info_t *info)
 	temp = head->n;
 	head->n = head->next->n;
 	head->next->n = temp;
+}
+
+/**
+ * add - add the top two elements of the stack
+ * @info: pointer to the monty info struct
+ */
+void add_op(monty_info_t *info)
+{
+	int sum;
+
+	if (info->stack_head == NULL || info->stack_head->next == NULL)
+	{
+		fprintf(stderr, "L%d: can't add, stack too short\n", info->line);
+		exit(EXIT_FAILURE);
+	}
+	sum = info->stack_head->n + info->stack_head->next->n;
+	pop_stack_s(info);
+	info->stack_head->n = sum;
 }
 
 /**
