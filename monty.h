@@ -95,6 +95,10 @@ void pop_op(monty_info_t *info);
 void swap_op(monty_info_t *info);
 void add_op(monty_info_t *info);
 void nop_op(monty_info_t *info);
+void sub_op(monty_info_t *info);
+void div_op(monty_info_t *info);
+void mul_op(monty_info_t *info);
+void mod_op(monty_info_t *info);
 
 /* utils.c */
 int is_number(char *str);
