@@ -7,6 +7,7 @@ const instruction_t opcodes[] = {
 	{"pop", pop_op},
 	{"swap", swap_op},
 	{"add", add_op},
+	{"nop", nop_op},
 	{NULL, NULL}};
 
 /**
@@ -113,6 +114,15 @@ void add_op(monty_info_t *info)
 	sum = info->stack_head->n + info->stack_head->next->n;
 	pop_stack_s(info);
 	info->stack_head->n = sum;
+}
+
+/**
+ * nop_op - do nothing
+ * @info: pointer to the monty info struct
+ */
+void nop_op(monty_info_t *info)
+{
+	(void)info;
 }
 
 /**
