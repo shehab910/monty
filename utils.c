@@ -90,6 +90,8 @@ void grace_exit(monty_info_t *info, int status)
 		free(info->fileS);
 	if (info->lines != NULL)
 		free(info->lines);
+	if (info->dup != NULL)
+		free(info->dup);
 	pop_all_stack_s(info);
 	exit(status);
 }
