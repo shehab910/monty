@@ -5,6 +5,7 @@ const instruction_t opcodes[] = {
 	{"pall", pall_op},
 	{"pint", pint_op},
 	{"pop", pop_op},
+	{"swap", swap_op},
 	{NULL, NULL}};
 
 /**
@@ -74,6 +75,25 @@ void pint_op(monty_info_t *info)
 void pop_op(monty_info_t *info)
 {
 	pop_stack_s(info);
+}
+
+/**
+ * swap_op - swap the top two elements of the stack
+ * @info: pointer to the monty info struct
+ */
+void swap_op(monty_info_t *info)
+{
+	stack_t *head = info->stack_head;
+	int temp;
+
+	if (head == NULL || head->next == NULL)
+	{
+		fprintf(stderr, "L%d: can't swap, stack too short\n", info->line);
+		exit(EXIT_FAILURE);
+	}
+	temp = head->n;
+	head->n = head->next->n;
+	head->next->n = temp;
 }
 
 /**
