@@ -3,6 +3,7 @@
 const instruction_t opcodes[] = {
 	{"push", push_op},
 	{"pall", pall_op},
+	{"pint", pint_op},
 	{NULL, NULL}};
 
 /**
@@ -47,6 +48,22 @@ void push_op(monty_info_t *info)
 void pall_op(monty_info_t *info)
 {
 	print_stack_s(info->stack_head);
+}
+
+/**
+ * pint_op - print the top of the stack
+ * @info: pointer to the monty info struct
+ */
+void pint_op(monty_info_t *info)
+{
+	stack_t *head = info->stack_head;
+
+	if (head == NULL)
+	{
+		fprintf(stderr, "L%d: can't pint, stack empty\n", info->line);
+		exit(EXIT_FAILURE);
+	}
+	printf("%d\n", head->n);
 }
 
 /**
