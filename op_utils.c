@@ -58,7 +58,7 @@ int op_handler(monty_info_t *info, char *line)
 
 	if (instruction.opcode == NULL)
 	{
-		fprintf(stderr, "L%d: unknown instruction %s\n", 1, tokens[0]);
+		fprintf(stderr, "L%d: unknown instruction %s\n", info->line, tokens[0]);
 		grace_exit(info, EXIT_FAILURE);
 	}
 
