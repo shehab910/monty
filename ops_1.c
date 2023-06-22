@@ -10,11 +10,11 @@ void push_op(monty_info_t *info)
 	int new_num;
 
 	if (info == NULL)
-		exit(EXIT_FAILURE);
+		grace_exit(info, EXIT_FAILURE);
 	if (info->tokens_len < 2)
 	{
 		fprintf(stderr, "L%d: usage: push integer\n", info->line);
-		exit(EXIT_FAILURE);
+		grace_exit(info, EXIT_FAILURE);
 	}
 	arg = info->tokens[1];
 	new_num = 0;
@@ -22,16 +22,16 @@ void push_op(monty_info_t *info)
 	if (arg == NULL)
 	{
 		fprintf(stderr, "L%d: usage: push integer\n", info->line);
-		exit(EXIT_FAILURE);
+		grace_exit(info, EXIT_FAILURE);
 	}
 	if (is_number(arg) == 0)
 	{
 		fprintf(stderr, "L%d: usage: push integer\n", info->line);
-		exit(EXIT_FAILURE);
+		grace_exit(info, EXIT_FAILURE);
 	}
 	new_num = atoi(arg);
 	if (push_stack_s(info, new_num) == 1)
-		exit(EXIT_FAILURE);
+		grace_exit(info, EXIT_FAILURE);
 }
 
 /**
@@ -54,7 +54,7 @@ void pint_op(monty_info_t *info)
 	if (head == NULL)
 	{
 		fprintf(stderr, "L%d: can't pint, stack empty\n", info->line);
-		exit(EXIT_FAILURE);
+		grace_exit(info, EXIT_FAILURE);
 	}
 	printf("%d\n", head->n);
 }
@@ -80,7 +80,7 @@ void swap_op(monty_info_t *info)
 	if (head == NULL || head->next == NULL)
 	{
 		fprintf(stderr, "L%d: can't swap, stack too short\n", info->line);
-		exit(EXIT_FAILURE);
+		grace_exit(info, EXIT_FAILURE);
 	}
 	temp = head->n;
 	head->n = head->next->n;

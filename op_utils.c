@@ -45,18 +45,21 @@ int op_handler(monty_info_t *info, char *line)
 	char *dupline;
 
 	dupline = _strdup(line);
+	info->dup = dupline;
 
 	tokens = parse_line(dupline);
 
 	if (tokens == NULL)
+	{
 		return (1);
+	}
 
 	instruction = get_instruction(tokens[0]);
 
 	if (instruction.opcode == NULL)
 	{
 		fprintf(stderr, "L%d: unknown instruction %s\n", 1, tokens[0]);
-		exit(EXIT_FAILURE);
+		grace_exit(info, EXIT_FAILURE);
 	}
 
 	if (info->tokens != NULL)
@@ -69,5 +72,6 @@ int op_handler(monty_info_t *info, char *line)
 	info->tokens_len = arr2dlen(tokens);
 	instruction.f(info);
 	free(dupline);
+	info->dup = dupline = NULL;
 	return (0);
 }

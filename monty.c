@@ -10,11 +10,9 @@ int main(int argc, char **argv)
 {
 	monty_info_t info;
 	stack_t *head = NULL;
-	char *fileS;
-	char **lines;
 	char *fileName;
 
-	/* fileName = "bytecodes/test.m"; */
+	/* fileName = "bytecodes/task0/task0_1.m"; */
 	fileName = argv[1];
 	if (argc != 2)
 	{
@@ -25,27 +23,27 @@ int main(int argc, char **argv)
 	info.stack_size = 0;
 	info.line = 1;
 
-	fileS = sReadFile(fileName);
-	lines = parse_to_lines(fileS);
+	info.fileS = sReadFile(fileName);
+	info.lines = parse_to_lines(info.fileS);
 	info.tokens = NULL;
+	info.dup = NULL;
 
-	while (lines[info.line - 1] != NULL)
+	while (info.lines[info.line - 1] != NULL)
 	{
 		if (
-			strlen(lines[info.line - 1]) != 0 &&
-			lines[info.line - 1][0] != '#' &&
-			!is_whitespace(lines[info.line - 1]))
+			strlen(info.lines[info.line - 1]) != 0 &&
+			info.lines[info.line - 1][0] != '#' &&
+			!is_whitespace(info.lines[info.line - 1]))
 		{
-			op_handler(&info, lines[info.line - 1]);
+			op_handler(&info, info.lines[info.line - 1]);
 		}
 		info.line++;
 	}
 	/* freeing last command */
 	free(info.tokens);
+	info.tokens = NULL;
 
-	free(fileS);
-	free(lines);
-	pop_all_stack_s(&info);
+	grace_exit(&info, EXIT_SUCCESS);
 
 	return (0);
 }

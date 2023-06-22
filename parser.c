@@ -63,6 +63,7 @@ char **tokenize(char *str, const char *delim)
 	if (tokens == NULL)
 	{
 		fprintf(stderr, MALLOC_FAIL_ERR);
+		free(str);
 		exit(EXIT_FAILURE);
 	}
 

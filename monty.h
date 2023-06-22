@@ -38,6 +38,9 @@ typedef struct stack_s
  * @stack_size: size of the stack
  * @tokens: array of tokens
  * @tokens_len: length of the tokens array
+ * @fileS: monty file string
+ * @lines: array of lines from the monty file
+ * @dup: duplicate of the line, used for free
  * Description: monty global information/variables
  */
 typedef struct monty_info_s
@@ -47,6 +50,9 @@ typedef struct monty_info_s
 	size_t stack_size;
 	char **tokens;
 	size_t tokens_len;
+	char *fileS;
+	char **lines;
+	char *dup;
 
 } monty_info_t;
 
@@ -104,5 +110,6 @@ int is_number(char *str);
 char *_strdup(const char *s);
 size_t arr2dlen(char **arr);
 int is_whitespace(char *str);
+void grace_exit(monty_info_t *info, int status);
 
 #endif /* MONTY_H */

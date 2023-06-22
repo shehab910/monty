@@ -34,7 +34,7 @@ int pop_stack_s(monty_info_t *info)
 	if (info->stack_head == NULL)
 	{
 		fprintf(stderr, "L%d: can't pop an empty stack\n", info->line);
-		exit(EXIT_FAILURE);
+		grace_exit(info, EXIT_FAILURE);
 	}
 	info->stack_head = info->stack_head->next;
 	free(temp);

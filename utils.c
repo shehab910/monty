@@ -76,3 +76,20 @@ int is_whitespace(char *str)
 
 	return (1);
 }
+
+/**
+ * grace_exit - exit function
+ * @info: monty info
+ * @status: exit status
+ */
+void grace_exit(monty_info_t *info, int status)
+{
+	if (info->tokens != NULL)
+		free(info->tokens);
+	if (info->fileS != NULL)
+		free(info->fileS);
+	if (info->lines != NULL)
+		free(info->lines);
+	pop_all_stack_s(info);
+	exit(status);
+}
