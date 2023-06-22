@@ -47,10 +47,10 @@ char **tokenize(char *str, const char *delim)
 {
 	char **tokens;
 	char *token;
-	long unsigned int token_count = 0;
+	unsigned long int token_count = 0;
 	int i = 0;
-
 	char *temp_str = _strdup(str);
+
 	token = strtok(temp_str, delim);
 	while (token != NULL)
 	{
@@ -75,7 +75,7 @@ char **tokenize(char *str, const char *delim)
 	}
 	tokens[i] = NULL;
 
-	return tokens;
+	return (tokens);
 }
 
 /**
@@ -85,7 +85,7 @@ char **tokenize(char *str, const char *delim)
  */
 char **parse_to_lines(char *str)
 {
-	return tokenize(str, "\n");
+	return (tokenize(str, "\n"));
 }
 /**
  * parse_line - parses a line into tokens
@@ -94,29 +94,7 @@ char **parse_to_lines(char *str)
  */
 char **parse_line(char *line)
 {
-	return tokenize(line, " \t");
-}
-
-/**
- * free_tokens - frees an array of tokens
- * @tokens: array of tokens to free
- */
-void free_tokens(char **tokens)
-{
-	int i = 0;
-	if (tokens == NULL)
-	{
-		printf("tokens is NULL\n");
-		return;
-	}
-
-	while (tokens[i] != NULL)
-	{
-		free(tokens[i]);
-		printf("freed tokens[%d]\n", i);
-		i++;
-	}
-	free(tokens);
+	return (tokenize(line, " \t"));
 }
 
 /**

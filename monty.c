@@ -31,9 +31,12 @@ int main(int argc, char **argv)
 
 	while (lines[info.line - 1] != NULL)
 	{
-		if (strlen(lines[info.line - 1]) != 0 && lines[info.line - 1][0] != '#' && !is_whitespace(lines[info.line - 1]))
+		if (
+			strlen(lines[info.line - 1]) != 0 &&
+			lines[info.line - 1][0] != '#' &&
+			!is_whitespace(lines[info.line - 1]))
 		{
-			new_op_handler(&info, lines[info.line - 1]);
+			op_handler(&info, lines[info.line - 1]);
 		}
 		info.line++;
 	}
