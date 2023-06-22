@@ -91,6 +91,7 @@ void pall_op(monty_info_t *info);
 int new_op_handler(monty_info_t *info, char *line);
 instruction_t get_instruction(char *opcode);
 void pint_op(monty_info_t *info);
+void pop_op(monty_info_t *info);
 
 /* utils.c */
 int is_number(char *str);

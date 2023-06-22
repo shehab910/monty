@@ -4,6 +4,7 @@ const instruction_t opcodes[] = {
 	{"push", push_op},
 	{"pall", pall_op},
 	{"pint", pint_op},
+	{"pop", pop_op},
 	{NULL, NULL}};
 
 /**
@@ -64,6 +65,15 @@ void pint_op(monty_info_t *info)
 		exit(EXIT_FAILURE);
 	}
 	printf("%d\n", head->n);
+}
+
+/**
+ * pop_op - remove the top element of the stack
+ * @info: pointer to the monty info struct
+ */
+void pop_op(monty_info_t *info)
+{
+	pop_stack_s(info);
 }
 
 /**
