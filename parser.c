@@ -37,33 +37,64 @@ char *sReadFile(char *filename)
 }
 
 /**
- * parse - parses a string into tokens
- * @str: string to parse
+ * tokenize - tokenizes a string
+ * @str: string to tokenize
+ * @delim: delimiter to tokenize by
  * Return: array of tokens
  */
-char **parse(char *str)
+
+char **tokenize(char *str, const char *delim)
 {
 	char **tokens;
 	char *token;
+	long unsigned int token_count = 0;
 	int i = 0;
 
-	tokens = malloc(sizeof(char *) * TOKEN_SIZE);
+	char *temp_str = _strdup(str);
+	token = strtok(temp_str, delim);
+	while (token != NULL)
+	{
+		token_count++;
+		token = strtok(NULL, delim);
+	}
+	free(temp_str);
+
+	tokens = malloc(sizeof(char *) * (token_count + 1));
 	if (tokens == NULL)
 	{
 		fprintf(stderr, MALLOC_FAIL_ERR);
 		exit(EXIT_FAILURE);
 	}
 
-	token = strtok(str, " \n\t");
+	token = strtok(str, delim);
 	while (token != NULL)
 	{
 		tokens[i] = token;
-		token = strtok(NULL, " \n\t");
+		token = strtok(NULL, delim);
 		i++;
 	}
 	tokens[i] = NULL;
 
-	return (tokens);
+	return tokens;
+}
+
+/**
+ * parse_to_lines - parses a string into lines
+ * @str: string to parse
+ * Return: array of tokens
+ */
+char **parse_to_lines(char *str)
+{
+	return tokenize(str, "\n");
+}
+/**
+ * parse_line - parses a line into tokens
+ * @line: line to parse
+ * Return: array of tokens
+ */
+char **parse_line(char *line)
+{
+	return tokenize(line, " \t");
 }
 
 /**
@@ -73,10 +104,16 @@ char **parse(char *str)
 void free_tokens(char **tokens)
 {
 	int i = 0;
+	if (tokens == NULL)
+	{
+		printf("tokens is NULL\n");
+		return;
+	}
 
 	while (tokens[i] != NULL)
 	{
 		free(tokens[i]);
+		printf("freed tokens[%d]\n", i);
 		i++;
 	}
 	free(tokens);

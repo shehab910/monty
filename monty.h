@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
+#include <ctype.h>
 
 #include "errors.h"
 /*
@@ -13,7 +14,6 @@
  */
 #define SUCCESS 0
 #define FAILURE -1
-#define TOKEN_SIZE 32
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -79,12 +79,26 @@ int pop_all_stack_s(monty_info_t *info);
 char *sReadFile(char *filename);
 void print_tokens(char **tokens);
 void free_tokens(char **tokens);
-char **parse(char *str);
+char **parse_to_lines(char *str);
+char **parse_line(char *str);
+char **tokenize(char *str, const char *delim);
 
 /* operations.c */
 void (*get_op_func(char *s))(monty_info_t *info);
 int op_handler(monty_info_t *info);
 void push_op(monty_info_t *info);
 void pall_op(monty_info_t *info);
+int new_op_handler(monty_info_t *info, char *line);
+instruction_t get_instruction(char *opcode);
+
+/* utils.c */
+int is_number(char *str);
+void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
+int _strcmp(const char *s1, const char *s2);
+char *_memcpy(char *dest, char *src, unsigned int n);
+void *arrayFill(void *array, int element, unsigned int length);
+char *_strdup(const char *s);
+size_t arr2dlen(char **arr);
+int is_whitespace(char *str);
 
 #endif /* MONTY_H */

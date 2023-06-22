@@ -11,29 +11,38 @@ int main(int argc, char **argv)
 	monty_info_t info;
 	stack_t *head = NULL;
 	char *fileS;
-	char **tokens;
-	int i;
+	char **lines;
+	char *fileName;
 
+	/* fileName = "bytecodes/test.m"; */
+	fileName = argv[1];
 	if (argc != 2)
 	{
-		printf("USAGE: monty file\n");
+		fprintf(stderr, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
 	info.stack_head = head;
 	info.stack_size = 0;
 	info.line = 1;
 
-	fileS = sReadFile(argv[1]);
-	tokens = parse(fileS);
+	fileS = sReadFile(fileName);
+	lines = parse_to_lines(fileS);
+	info.tokens = NULL;
 
-	info.tokens = tokens;
+	while (lines[info.line - 1] != NULL)
+	{
+		if (strlen(lines[info.line - 1]) != 0 && lines[info.line - 1][0] != '#' && !is_whitespace(lines[info.line - 1]))
+		{
+			new_op_handler(&info, lines[info.line - 1]);
+		}
+		info.line++;
+	}
+	/* freeing last command */
+	free(info.tokens);
 
-	i = 0;
-	while (tokens[i] != NULL)
-		i++;
-	info.tokens_len = i;
-	info.token_index = 0;
+	free(fileS);
+	free(lines);
+	pop_all_stack_s(&info);
 
-	return (op_handler(&info));
 	return (0);
 }
