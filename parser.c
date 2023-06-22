@@ -51,6 +51,11 @@ char **tokenize(char *str, const char *delim)
 	int i = 0;
 	char *temp_str = _strdup(str);
 
+	if (temp_str == NULL)
+	{
+		fprintf(stderr, MALLOC_FAIL_ERR);
+		exit(EXIT_FAILURE);
+	}
 	token = strtok(temp_str, delim);
 	while (token != NULL)
 	{

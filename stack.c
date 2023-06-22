@@ -13,7 +13,7 @@ int push_stack_s(monty_info_t *info, int new_num)
 	if (new_node == NULL)
 	{
 		fprintf(stderr, MALLOC_FAIL_ERR);
-		return (1);
+		grace_exit(info, EXIT_FAILURE);
 	}
 	new_node->n = new_num;
 	new_node->next = info->stack_head;

@@ -45,6 +45,8 @@ int op_handler(monty_info_t *info, char *line)
 	char *dupline;
 
 	dupline = _strdup(line);
+	if (dupline == NULL)
+		grace_exit(info, EXIT_FAILURE);
 	info->dup = dupline;
 
 	tokens = parse_line(dupline);
