@@ -12,6 +12,10 @@ const instruction_t opcodes[] = {
 	{"div", div_op},
 	{"mul", mul_op},
 	{"mod", mod_op},
+	{"pchar", pchar_op},
+	{"pstr", pstr_op},
+	{"rotl", rotl_op},
+	{"rotr", rotr_op},
 	{NULL, NULL}};
 
 /**

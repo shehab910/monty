@@ -97,6 +97,10 @@ void swap_op(monty_info_t *info);
 
 /* ops_2.c */
 void nop_op(monty_info_t *info);
+void pchar_op(monty_info_t *info);
+void pstr_op(monty_info_t *info);
+void rotl_op(monty_info_t *info);
+void rotr_op(monty_info_t *info);
 
 /* arith_ops.c */
 void add_op(monty_info_t *info);
